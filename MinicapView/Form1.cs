@@ -45,12 +45,18 @@ namespace MinicapView
 
         private void pictureBoxMain_MouseDown(object sender, MouseEventArgs e)
         {
-            minitouch.TouchDown(e);            
+            minitouch.TouchDown(minicap.Banner,e);            
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            System.Environment.Exit(0);
+            System.Environment.Exit(0);            
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            minitouch.KeyDown(keyData);
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private Point Rotate(Point point)

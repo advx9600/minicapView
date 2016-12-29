@@ -63,7 +63,7 @@ namespace Minicap
         /// 用于执行按下操作
         /// </summary>
         /// <param name="downpoint">按下的坐标值(此处为在本地显示的图像坐标点)</param>
-        public void TouchDown(MouseEventArgs e)
+        public void TouchDown(Minicap.Banner banner, MouseEventArgs e)
         {
             //转换为设备的真实坐标
             //Point realpoint = PointConvert(downpoint);
@@ -72,8 +72,8 @@ namespace Minicap
 
             //Debug.WriteLine(e.Location.X + "," + e.Location.Y);
             if (e.Button == MouseButtons.Left)
-            {
-                exeCmd(String.Format("adb shell input tap {0} {1}", e.Location.X, e.Location.Y));
+            {                
+                exeCmd(String.Format("adb shell input tap {0} {1}", e.Location.X * banner.RealWidth /banner.VirtualWidth, e.Location.Y * banner.RealHeight / banner.VirtualHeight));
             }
             else
             {
@@ -81,6 +81,27 @@ namespace Minicap
             }            
         }
 
+        public void KeyDown(Keys keyData)
+        {           
+            switch (keyData)
+            {
+                case Keys.Up:
+                    exeCmd("adb shell input keyevent 19");
+                    break;
+                case Keys.Down:
+                    exeCmd("adb shell input keyevent 20");
+                    break;
+                case Keys.Left:
+                    exeCmd("adb shell input keyevent 21");
+                    break;
+                case Keys.Right:
+                    exeCmd("adb shell input keyevent 22");
+                    break;
+                case Keys.Enter:
+                    exeCmd("adb shell input keyevent 23");
+                    break;
+            }
+        }
         private void exeCmd(String cmd)
         {
             Debug.WriteLine(cmd);

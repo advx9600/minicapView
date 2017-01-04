@@ -67,5 +67,19 @@ namespace MinicapView
             //}
             return point;
         }
+
+        public void RunCmd(string cmd)
+        {
+            Process proc =new Process(); 
+            //proc.StartInfo.CreateNoWindow = false;
+            proc.StartInfo.FileName = "cmd.exe";
+            //proc.StartInfo.UseShellExecute = false;
+            //proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.RedirectStandardInput = true;
+            //proc.StartInfo.RedirectStandardOutput = true;
+            proc.Start();
+            proc.StandardInput.WriteLine(cmd);
+            proc.Close();
+        } 
     }
 }

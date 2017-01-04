@@ -6,7 +6,7 @@ def exe(cmd):
 	os.system(cmd)
 	
 mydir = "/data/local/tmp"
-if False:
+if True:
 	exe("adb push  minicap.so " + mydir)	
 	exe("adb push minicap "+mydir)
 	exe("adb shell chmod 777 "+ mydir+"/minicap")
